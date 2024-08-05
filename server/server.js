@@ -10,8 +10,11 @@ dotenv.config();
 
 //home routing
 const router = require('./router/homerouter')
-app.use("/home/v1/api",router);
+//routing for the changing room part
+const queueRouter = require('./router/queuerouter')
 
+app.use("/home/v1/api",router);
+app.use("/rooms/api",queueRouter)
 
 //mongodb server
 const mongoose = require('mongoose');
