@@ -1,29 +1,34 @@
 import React from 'react';
 import '/src/App.css'; // Make sure the path is correct based on your project structure
+import { UseContext } from '../contextapi/context';
 
 const Home = () => {
+  const { Cards } = UseContext();
+
   return (
     <div className="home">
       <div className="bottomContainer">
-        <div className="cardsContainer"> 
-          <div className="box">  
-            <img src="src/assets/sh2.jpg" alt="img" />
-            <div className="row">
-              <button className="tag">L</button>
-              <button className="tag">Zara</button>
-              <button className="tag">Shelf: A12</button>
-            </div>
-            <div className="colorbutton">
-              <button id="red" className="butu"></button>
-              <button id="orange" className="butu"></button>
-              <button id="yellow" className="butu"></button>
-              <button id="green" className="butu"></button>
-              <button id="black" className="butu"></button>
-            </div>
-            <p className="title">Cotton Shirt</p>
-            <button type="button" className="button">$120</button>
+        {Cards ? (
+          Cards.length === 0 ? (
+            <h1>No Data Found</h1>
+          ) : (
+            Cards.map((card, index) => (
+              <div key={index}>{card}</div>
+            ))
+          )
+        ) : (
+          // Loader
+          <div className="honeycomb">
+            <h1>Loading</h1>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
           </div>
-        </div>
+        )}
       </div>
     </div>
   );

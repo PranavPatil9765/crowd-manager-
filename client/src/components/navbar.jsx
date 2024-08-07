@@ -1,8 +1,30 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import '/src/App.css'; // Make sure the path is correct based on your project structure
-
+import { useNavigate } from 'react-router-dom';
+import { UseContext } from '../contextapi/context';
 const Navbar = () => {
-  const [activeTab, setActiveTab] = useState('');
+  const navigate = useNavigate();
+  const {ApplyPriceFilter} = UseContext();
+  const [size,setsize] = useState(null);
+  const [minprice, setminPrice] = useState(null);
+  const [maxprice, setmaxPrice] = useState(null);
+  useEffect(()=>{
+    const dropdown = document.querySelectorAll('.size-item');
+    dropdown.forEach((data)=>{
+     data.addEventListener('click', (e) => {
+       setsize(e.target.value);
+     }); 
+    
+    });
+    return () => dropdown.forEach((data)=>{
+      data.removeEventListener('click', (e) => {});
+    })
+  },[])
+
+  const ApplyFilter = ()=>{
+    ApplyPriceFilter(size ,minprice, maxprice);
+    closeDrawer();
+  }
 
   const openDrawer = () => {
     document.getElementById("myDrawer").style.width = "250px";
@@ -13,13 +35,13 @@ const Navbar = () => {
   };
 
   const redirectToHome = () => {
-    setActiveTab('home');
-    // Implement the function to redirect to the home page
+    ApplyPriceFilter();
+    closeDrawer();
   };
 
   const redirectToScanQR = () => {
-    setActiveTab('scanQR');
-    // Implement the function to redirect to the ScanQR page
+    
+    navigate("/scan");
   };
 
   const toggleDropdown = () => {
@@ -30,60 +52,59 @@ const Navbar = () => {
     document.getElementById("priceDropdown").classList.toggle("show");
   };
 
-  const applyPriceFilter = () => {
-    // Implement the function to apply the price filter
-  };
-
-  const redirectToTopBrands = () => {
-    // Implement the function to redirect to the Top Brands page
-  };
+  
 
   return (
     <>
       <div className="topContainer">
         <span className="hamburger" onClick={openDrawer}>&#9776;</span>
         <div className="tabContainer">
-          <button className={`tabs ${activeTab === 'home' ? 'active' : ''}`} onClick={redirectToHome}>Home</button>
-          <button className={`tabs ${activeTab === 'scanQR' ? 'active' : ''}`} onClick={redirectToScanQR}>ScanQR</button>
+          <button className='tabs' onClick={redirectToHome}>Home</button>
+          <button className="tabs" onClick={redirectToScanQR}>ScanQR</button>
         </div>
         <img src="/src/assets/logow.png" width="155" style={{ height: '100%', width: '120px' }} alt="Logo" />
       </div>
       
       <div className="drawer" id="myDrawer">
-        <a href="javascript:void(0)" className="closebtn" onClick={closeDrawer}>&times;</a>
+        <a href="#" className="closebtn" onClick={closeDrawer}>&times;</a>
         <a href="#" onClick={redirectToHome}>Explore all</a>
         <a href="#" onClick={toggleDropdown}>Size</a>
-        <div id="sizeDropdown" className="dropdown-content">
+        <div id="sizeDropdown" className="dropdown-content" 
+        >
           <label className="dropdown-item">
-            <input type="radio" name="size" value="S" />
+            <input type="radio" name="size" value="S" className='size-item'/>
             S
           </label>
           <label className="dropdown-item">
-            <input type="radio" name="size" value="M" />
+            <input type="radio" name="size" value="M" className='size-item'/>
             M
           </label>
           <label className="dropdown-item">
-            <input type="radio" name="size" value="L" />
+            <input type="radio" name="size" value="L" className='size-item'/>
             L
           </label>
           <label className="dropdown-item">
-            <input type="radio" name="size" value="XL" />
+            <input type="radio" name="size" value="XL" className='size-item'/>
             XL
           </label>
           <label className="dropdown-item">
-            <input type="radio" name="size" value="XXL" />
+            <input type="radio" name="size" value="XXL" className='size-item'/>
             XXL
           </label>
         </div>
         <a href="#" onClick={togglePriceDropdown}>Price</a>
         <div id="priceDropdown" className="price-dropdown">
           <label htmlFor="minPrice">Min Price:</label>
-          <input type="number" id="minPrice" name="minPrice" placeholder="Enter min price" />
+          <input type="number" id="minPrice" name="minPrice" placeholder="Enter min price" onChange={(e)=>{
+            setminPrice(e.target.value);
+          }} value={minprice}/>
           <label htmlFor="maxPrice">Max Price:</label>
-          <input type="number" id="maxPrice" name="maxPrice" placeholder="Enter max price" /><br /><br />
-          <button onClick={applyPriceFilter} style={{ width: '45px', display: 'flex', justifyContent: 'center' }}>Apply</button>
+          <input type="number" id="maxPrice" name="maxPrice" placeholder="Enter max price" onChange={(e)=>{
+            setmaxPrice(e.target.value);
+          }} value={maxprice}/><br /><br />
         </div>
-        <a href="#" onClick={redirectToTopBrands}>Top Brands</a>
+        <a href="#">Top Brands</a>
+          <button onClick={ApplyFilter} style={{ width: '45px', display: 'flex', justifyContent: 'center' }}>Apply</button>
       </div>
     </>
   );

@@ -7,6 +7,10 @@ app.use(express.json());
 const dotenv = require('dotenv');
 dotenv.config();
 
+//cors configuration
+
+const cors = require('cors');
+app.use(cors());
 
 //home routing
 const router = require('./router/homerouter')
