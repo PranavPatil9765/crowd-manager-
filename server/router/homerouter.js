@@ -13,18 +13,23 @@ router.route("/").get(async(req, res) => {
 })
 
 router.route("/").post(async(req, res) => {
-
+    
     //making a dynamic search query
     const dynamic_query = {};
-    const {name,size,featured,price,location,brand} = req.body;
-    if(name) dynamic_query.name = name;
+    const{size,minprice,maxprice} = req.body;
+    
+    
     if(size) dynamic_query.size = size;
-    if(featured) dynamic_query.featured = featured;
-    if(price) dynamic_query.price = price;
-    if(location) dynamic_query.location = location;
-    if(brand) dynamic_query.brand = brand;
+    if(minprice && maxprice){
+        dynamic_query.price = {$gte:minprice, $lte:maxprice};
+    }
 
-    const dynamic_data = db.find(dynamic_query);
-    return res.status(200).json(dynamic_data);
+    const dynamic_data = await db.find(dynamic_query);
+    if(!dynamic_data){
+        return res.status(200);
+    }else{
+
+        return res.status(200).json(dynamic_data);
+    }
 })
 module.exports = router;

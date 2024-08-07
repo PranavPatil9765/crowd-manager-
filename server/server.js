@@ -7,11 +7,18 @@ app.use(express.json());
 const dotenv = require('dotenv');
 dotenv.config();
 
+//cors configuration
+
+const cors = require('cors');
+app.use(cors());
 
 //home routing
 const router = require('./router/homerouter')
-app.use("/home/v1/api",router);
+//routing for the changing room part
+const queueRouter = require('./router/queuerouter')
 
+app.use("/home/v1/api",router);
+app.use("/rooms/api",queueRouter)
 
 //mongodb server
 const mongoose = require('mongoose');
