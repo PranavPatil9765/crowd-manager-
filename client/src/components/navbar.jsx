@@ -5,9 +5,9 @@ import { UseContext } from '../contextapi/context';
 const Navbar = () => {
   const navigate = useNavigate();
   const {ApplyPriceFilter} = UseContext();
-  const [size,setsize] = useState(null);
-  const [minprice, setminPrice] = useState(null);
-  const [maxprice, setmaxPrice] = useState(null);
+  const [size,setsize] = useState("");
+  const [minprice, setminPrice] = useState("");
+  const [maxprice, setmaxPrice] = useState("");
   useEffect(()=>{
     const dropdown = document.querySelectorAll('.size-item');
     dropdown.forEach((data)=>{
@@ -59,7 +59,7 @@ const Navbar = () => {
       <div className="topContainer">
         <span className="hamburger" onClick={openDrawer}>&#9776;</span>
         <div className="tabContainer">
-          <button className='tabs' onClick={redirectToHome}>Home</button>
+          <button className='tabs' onClick={()=>{navigate("/")}}>Home</button>
           <button className="tabs" onClick={redirectToScanQR}>ScanQR</button>
         </div>
         <img src="/src/assets/logow.png" width="155" style={{ height: '100%', width: '120px' }} alt="Logo" />
