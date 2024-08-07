@@ -4,16 +4,18 @@ import "./scan.css"
 
 const Scan = () => {
   return <>
-    <div className="main-container">
-    <div className="container">
-        <div className="loader"><IoPersonSharp size={150}/>
-        <span id="countdown"> 0</span></div>
+    <div className="scan-card">
+      <div className="scan-container">
+        <div className="scan-loader">
+          <IoPersonSharp size={65} />
+          <span id="scan-countdown">0</span>
+        </div>
+      </div>
+      <p id="scan-status-message">You are now at position: <span id="scan-status-number">0</span></p>
+      <div className="scan-button-container">
+        <button className="scan-btn" id="scan-toggle-button">Book Now</button>
+      </div>
     </div>
-    <p id="statusMessage">You are now at position: <span id="statusNumber">0</span></p>
-    <div className="button-container">
-        <button className="btn" id="toggle-button">Book Now</button>
-    </div>
-</div>
 
 </>
 }
