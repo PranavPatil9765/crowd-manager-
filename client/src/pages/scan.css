@@ -1,14 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
 
-body, html {
-  height: 100%;
-  margin: 0;
-  font-family: 'Poppins', sans-serif;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: #FFFFFF;
-}
+
 
 .scan-wrapper {
   display: flex;
@@ -31,6 +23,7 @@ body, html {
   background: #FFFFFF;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin: 50px auto;
 }
 
 .scan-container {

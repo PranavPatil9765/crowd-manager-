@@ -73,6 +73,8 @@ img {
 
 .bottomContainer {
   display: flex;
+  justify-content: center;
+  align-items: center;
   flex-wrap: wrap;
    /* Take up remaining space */
     background-color: black;

@@ -103,7 +103,7 @@ const Navbar = () => {
             setmaxPrice(e.target.value);
           }} value={maxprice}/><br /><br />
         </div>
-        <a href="#">Top Brands</a>
+       
           <button onClick={ApplyFilter} style={{ width: '45px', display: 'flex', justifyContent: 'center' }}>Apply</button>
       </div>
     </>
