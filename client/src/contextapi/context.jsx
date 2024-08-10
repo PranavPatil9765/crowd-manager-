@@ -1,15 +1,23 @@
 import React, { createContext, useContext, useEffect, useState ,useMemo} from "react";
 import { MdOutlineStar } from "react-icons/md";
-
+import {useNavigate} from "react-router-dom"
 // Create AuthContext
 export const CardContext = createContext();
 
 // Provide AuthContext
 export const CardProvider = ({ children }) => {
-    const [Cards, SetCards] = useState(null);
-    const [loading,setloading] = useState(false);
+  const [Cards, SetCards] = useState(null);
+  const [loading,setloading] = useState(false);
+  const [product,setproduct] = useState(null);
+  const navigate = useNavigate();
+
+  async function gotoproduct(object){
+    setproduct(object);
+    navigate("/product");
     
-    useMemo(() => {
+  }
+  
+  useEffect(() => {
         
         
         // Fetch data from an API or any other source
@@ -24,7 +32,7 @@ export const CardProvider = ({ children }) => {
             const showCards = data.map((object) => {
               
               return (
-                <div className="cardsContainer">
+                <div className="cardsContainer" onClick={()=>{gotoproduct(object)}}>
                       <div className="box">
                       
                       {object.featured &&  <MdOutlineStar className="star"/>}
@@ -97,7 +105,7 @@ export const CardProvider = ({ children }) => {
         }
 
     return (
-        <CardContext.Provider value={{ Cards , ApplyPriceFilter ,loading }}>
+        <CardContext.Provider value={{ Cards , ApplyPriceFilter ,loading ,product}}>
             {children}
         </CardContext.Provider>
     );
