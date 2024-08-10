@@ -2,6 +2,14 @@ const express = require('express');
 const app = express();
 app.use(express.urlencoded({extended:true}));
 app.use(express.json());
+const socketIO = require('./utils/socketio');
+
+const http = require("http");
+const server = http.createServer(app);
+
+const io = socketIO.init(server);
+
+
 
 //dotenv configuration
 const dotenv = require('dotenv');
@@ -35,6 +43,6 @@ mongoose.connect(process.env.MONGODB_URL,{
 
 //app listening
 const port = process.env.PORT;
-app.listen(port,()=>{
+server.listen(port,()=>{
     console.log(`Server is running on port ${port}`);
 });
