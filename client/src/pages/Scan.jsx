@@ -6,6 +6,27 @@ const Scan = () => {
   const [phone] = useState(2);
   const [position,setPosition] = useState(0);
   useEffect(() => {
+    async function initStatus() {
+      try {
+        const response = await fetch("http://localhost:3000/rooms/api/", {
+          method: "POST",
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ phone })
+        });
+
+        const data = await response.json();
+        console.log(data);
+
+        if (data.position !== undefined) {
+          setPosition(data.position);
+        }
+      } catch (error) {
+        console.error("Error fetching initial status:", error);
+      }
+    }
+    initStatus();
     const socket = io('http://localhost:3000'); 
     socket.on("Update", data => {
       console.log(data);

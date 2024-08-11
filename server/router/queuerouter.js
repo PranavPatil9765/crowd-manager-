@@ -2,18 +2,18 @@ const express = require('express');
 const users = require('../utils/userSchema');
 const queueRouter = express.Router();
 const socketIO = require("../utils/socketio");
-queueRouter.route("/").put(async (req, res) =>{
+
+queueRouter.route("/").post(async (req, res) =>{
     // return the status of particular user
     const user = req.body;
     const userInfo = await users.findOne({phone : user.phone})
     if(userInfo){
-        const io = socketIO.getIO();
         if(userInfo.position == -1){
             const lastUser = await users.findOne({}).sort({ position : -1});
             userInfo.position = lastUser.position+1;
         }
-        io.emit("Status",{
-            phone: userInfo.phone,
+        return res.status(200).json({
+            phone : userInfo.phone,
             position : userInfo.position
         })
     }else{
@@ -56,6 +56,7 @@ queueRouter.route("/remove").put( async (req, res) =>{
         // console.log(changedUsers);
         await users.updateMany({position : { $gt : userInfo.position}}, {$inc : {position : -1}});
         await users.updateOne({ phone : userInfo.phone}, {position : -1});
+        const lastUser = await users.findOne({}).sort({ position : -1});
         const io = socketIO.getIO();
         if(changedUsers && changedUsers.length > 0){
             changedUsers.forEach(changedUser => {
@@ -72,7 +73,7 @@ queueRouter.route("/remove").put( async (req, res) =>{
         }
         io.emit("Update",{
             phone : user.phone,
-            position : -1
+            position : lastUser.position+1
         })
         return res.status(200).json({
             msg : "User removed successfully"
