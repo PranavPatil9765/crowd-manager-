@@ -1,261 +1,242 @@
 * {
-    box-sizing: border-box; /* Ensure padding and borders are included in width/height calculations */
-    margin: 0;
-    padding: 0;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-body {
-    margin: 0;
-    padding: 0;
-    height: 100vh;
-    width: 100vw;
-    display: flex;
-    flex-direction: column; /* Arrange containers in a column */
-    background-color: black;
-    overflow-x: hidden; /* Hide horizontal overflow */
+#root{
+  width: 100%;
+  height: 100vh;
 }
 
-img {
-    height: 89px;
-    max-width: 100%; /* Ensure images do not overflow their container */
-    height: auto; /* Maintain aspect ratio */
+body, html {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #ffffff;
+  color: #1B4965;
+  overflow-x: hidden; /* Prevent horizontal scroll */
 }
-/* for all images */
 
-
-
-
-
-/* Hereafter starts Navbar container CSS */
-.topContainer {
-    width: 100vw;
-    height: 15vh;
-    display: flex;
-    background-color: rgb(4, 25, 16);
-    box-sizing: border-box;
-} 
-/* Container for navbar */
-
-.tabContainer {
-    background-color: rgb(4, 25, 16);
-    width: 100%;
-    display: flex;
-    justify-content: space-around;
-}
-/* Container for Home and ScanQR tabs  */
-
-.tabs {
-    color: white;
-    font-weight: bold;
-    background-color: rgb(4, 25, 16);
-    border: 0;
-    text-decoration: none;
-}
-/* Home and ScanQR tabs */
-  
-.tabs:hover{
-  text-shadow: 1px -1px 5px white;
-}
-/* for text decoration on active tabs */
-
-
-
-
-
-
-
-
-
-
-
-
-/* Hereafter starts cards container CSS */
-
-.bottomContainer {
+.header-container {
+  background-color: #aaf1f0;
+  width: 100%;
+  color: white;
+  padding: 2%;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  flex-wrap: wrap;
-   /* Take up remaining space */
-    background-color: black;
-    padding: 60px; /* Add padding to create space around .cardsContainer */
-    box-sizing: border-box;
-    overflow-y: auto; /* Allows scrolling if content overflows */
 }
-/* Container for body i.e home.js */
 
-.cardsContainer {
-    background-color: black; /* Set the background color of the cards container */
-    box-sizing: border-box; /* Ensure padding is included in width and height calculations */
-    margin: 20px;
-    display: flex;
-    justify-content: center;
-    gap: 70px;
-    flex-wrap: wrap;
-   /* Prevent horizontal overflow */
+.walmart-name {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: black;
 }
-/* Container in .bottomContainer which holds all the various cards */
+
+.search-bar {
+  padding: 0.5%;
+  padding-left: 1%;
+  border-radius: 20px;
+  border: none;
+  width: 50%;
+}
+
+.button-group {
+  display: flex;
+  width: 30%;
+  gap: 4px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+button {
+  background-color: white;
+  color: #1B4965;
+  padding: 0.5% 8%;
+  border: 1px solid #62B6CB;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  background-color: #62B6CB;
+  color: white;
+}
+
+.profile-button {
+  border-radius: 50%;
+  padding: 5px;
+  width: 35px;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (max-width: 870px) {
+  .header-container {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .search-bar {
+    width: 100%;
+  }
+
+  .button-group {
+    width: 100%;
+    justify-content: space-around;
+  }
+
+  button {
+    font-size: 80%;
+    padding: 2% 2%;
+  }
+}
+
+.sec-container {
+  display: flex;
+  justify-content: space-around;
+  padding: 2% 2%;
+  flex-wrap: wrap; /* Ensure content wraps within screen width */
+}
+
+@media (max-width: 500px) {
+  .sec-container {
+    justify-content: space-between; /* Distribute space evenly */
+    padding: 3% 3%; /* Increase padding to 3% */
+  }
+
+  .sec-container > * {
+    margin-bottom: 3%; /* Ensure vertical spacing between wrapped elements */
+  }
+}
+
+.main-nav {
+  margin-top: 5px;
+}
+
+.circle-button {
+  width: 5vw;
+  height: 4vh;
+  color: #000000;
+  font-size: 18%;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 10px;
+}
+
+.product-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Responsive grid */
+  gap: 20px;
+  padding: 10px;
+  background-color: #FFFFFF;
+}
 
 .box {
-
-    width: 205px;
-    padding: 10px;
-    border-radius: 5px;
-    background-color: #252525;
-    position: relative;
-    transition: all 0.3s ease-in-out; /* Smooth transition for the hover effect */
-    box-sizing: border-box;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column; /* Arrange child elements in a column */
-    justify-content: space-between; /* Space elements between top and bottom */
+  background-color: #BEE9E8;
+  border-radius: 10px;
+  padding: 10px;
+  transition: transform 0.3s;
+  margin: 10%;
 }
-/* This is the card box */
-
-.box:hover {
-    transform: scale(1.02); /* Increase size by 8 pixels on hover */
-}
-/* zoom transition on card */
 
 .box img {
-    width: 100%;
-    height: auto;
-    border-radius: 10px;
-    margin-bottom: 10px;
+  width: 100%;
+  border-radius: 10px;
 }
-/* image inside card */
+
+.box:hover {
+  transform: scale(1.05);
+}
 
 .row {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 8px;
+  display: flex;
+  gap: 10px;
+  margin: 10px 0;
 }
 
 .tag {
-    background-color: #eee;
-    border: none;
-    border-radius: 4px;
-    padding: 4px 11px;
-    font-size: 12px;
-    color: black;
+  background-color: #62B6CB;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 12px;
 }
-/* tags below card image which have size, brand name, shelf number  */
-
-.button {
-    border: none;
-    width: 30px; /* Adjust width as needed */
-    height: 30px; /* Adjust height to match width */
-    border-radius: 50%; /* Make the button circular */
-    display: flex;
-    justify-content: center;
-    align-items: center; /* Center the content inside the button */
-    margin-right: 5px;
-    cursor: pointer; /* Change cursor to pointer for better user experience */
-}
-/* CSS For each circular color button  */
-
-
-/* Which colors to give on which button */
-
-/* The class name for color buttons overall */
 
 .title {
-    font-size: 18px;
-    margin-top: 10px;
-    margin-bottom: 0px;
-    color: white;
-}
-/* Title of card */
-
-button.button {
-    background-color: rgb(255, 255, 255);
-    border: none;
-    color: rgb(0, 0, 0);
-    padding: 10px 20px;
-    border-radius: 4px;
-    cursor: pointer;
-    margin-top: 12px;
-    align-self: center; /* Center the button horizontally */
-    width: 90%; /* Ensure button does not exceed the container width */
-    box-sizing: border-box; /* Include padding and border in element's total width and height */
-}
-/* The button which showcases price */
-
-
-
-
-/* Hereafter starts Hamburger css */
-.hamburger {
-    font-size: 30px;
-    cursor: pointer;
-    color: white; /* White color for the hamburger icon */
-    padding: 15px;
-    margin-top: 7px;
-    margin-left: 10px;
-}
-
-.drawer {
-    height: 100%;
-    width: 0;
-    position: fixed;
-    z-index: 1;
-    top: 0;
-    left: 0;
-    background-color: black;
-    overflow-x: hidden;
-    transition: 0.5s;
-    padding-top: 60px;
-}
-
-.drawer a {
-    padding: 8px 8px 8px 32px;
-    text-decoration: none;
-    font-size: 25px;
-    color: white;
-    display: block;
-    transition: 0.3s;
-}
-
-.drawer a:hover {
-    color: #f1f1f1;
-}
-
-.drawer .closebtn {
-    position: absolute;
-    top: 0;
-    right: 25px;
-    font-size: 36px;
-    margin-left: 50px;
+  font-size: 18px;
+  font-weight: bold;
+  margin: 10px 0;
 }
 
 
-
-
-
-/* Hereafter starts scrollbar css */
-
-/* Scrollbar styles for Firefox */
-body {
-    scrollbar-width: thin; /* Set the scrollbar width */
-    scrollbar-color: #333 black; /* Set scrollbar thumb and track colors */
+.footer {
+  
+  background-color: #62B6CB;
+  color: white;
+  text-align: center;
+  padding: 15px;
+  position: absolute;
+  bottom: 0px;
+  width: 100%;
 }
 
-/* Scrollbar styles for WebKit-based browsers (Chrome, Safari) */
-::-webkit-scrollbar {
-    width: 12px; /* Width of the scrollbar */
+/* Dropdown Styling */
+.dropdown {
+  position: relative;
 }
 
-::-webkit-scrollbar-track {
-    background: black; /* Background of the scrollbar track */
+.dropdown-button {
+  background-color: white;
+  color: #1B4965;
+  padding: 8px 15px;
+  border: 1px solid #62B6CB;
+  border-radius: 20px;
+  font-size: 90%;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
 }
 
-::-webkit-scrollbar-thumb {
-    background: #333; /* Color of the scrollbar thumb */
-    border-radius: 10px; /* Rounded corners for the scrollbar thumb */
+.dropdown-button:hover {
+  background-color: #62B6CB;
+  color: white;
 }
 
-::-webkit-scrollbar-thumb:hover {
-    background: #555; /* Color of the scrollbar thumb on hover */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #CAE9FF;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  padding: 10px;
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: #1B4965;
+  padding: 8px 15px;
+  text-decoration: none;
+  display: block;
+  border-radius: 10px;
+}
+
+.dropdown-content a:hover {
+  background-color: #62B6CB;
+  color: white;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
 }
 
 
@@ -268,192 +249,216 @@ body {
 
 
 
-.row .tag {
-    margin-right: 2px; /* Constant gap between tag buttons */
-  }
-  
-  .dropdown-content, .price-dropdown {
-    display: none;
-    position: relative;
-    background-color: black;
-    min-width: 200px;
-    z-index: 1;
-    margin-left: 32px;
-    padding: 10px;
-    font-size: 20px;
-  }
-  
-  .dropdown-content label, .price-dropdown label {
-    color: white;
-    padding: 8px 8px;
-    text-decoration: none;
-    display: block;
-    font-size: 20px;
-  }
-  
-  .dropdown-content input[type="radio"] {
-    margin-right: 8px;
-  }
-  
-  .dropdown-content label:hover, .price-dropdown label:hover {
-    background-color: #575757;
-  }
-  
-  .show {
-    display: block;
-  }
-  
-  .price-dropdown input {
-    width: calc(100% - 16px);
-    margin: 4px 0;
-    padding: 4px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-  }
-  
-  .drawer button {
-    background-color: #f90;
-    border: none;
-    color: white;
-    padding: 10px;
-    border-radius: 4px;
-    cursor: pointer;
-    width: 100%;
-    margin: 20px auto;
+
+/* loader css */
+
+/* From Uiverse.io by Nawsome */ 
+
+.pl{
+  margin: 40px auto;
+}
+
+.pl {
+  width: 6em;
+  height: 6em;
+}
+
+.pl__ring {
+  animation: ringA 2s linear infinite;
+}
+
+.pl__ring--a {
+  stroke: #f42f25;
+}
+
+.pl__ring--b {
+  animation-name: ringB;
+  stroke: #f49725;
+}
+
+.pl__ring--c {
+  animation-name: ringC;
+  stroke: #255ff4;
+}
+
+.pl__ring--d {
+  animation-name: ringD;
+  stroke: #f42582;
+}
+
+/* Animations */
+@keyframes ringA {
+  from, 4% {
+    stroke-dasharray: 0 660;
+    stroke-width: 20;
+    stroke-dashoffset: -330;
   }
 
-
-
-  /* loader css */
-
-  /* From Uiverse.io by boryanakrasteva */ 
-@-webkit-keyframes honeycomb {
-    0%,
-    20%,
-    80%,
-    100% {
-      opacity: 0;
-      -webkit-transform: scale(0);
-      transform: scale(0);
-    }
-  
-    30%,
-    70% {
-      opacity: 1;
-      -webkit-transform: scale(1);
-      transform: scale(1);
-    }
-  }
-  
-  @keyframes honeycomb {
-    0%,
-    20%,
-    80%,
-    100% {
-      opacity: 0;
-      -webkit-transform: scale(0);
-      transform: scale(0);
-    }
-  
-    30%,
-    70% {
-      opacity: 1;
-      -webkit-transform: scale(1);
-      transform: scale(1);
-    }
-  }
-  
-  .honeycomb {
-    height: 24px;
-    position: relative;
-    width: 24px;
-    
-    margin: 60px auto;
-  }
-  
-  .honeycomb div {
-    -webkit-animation: honeycomb 2.1s infinite backwards;
-    animation: honeycomb 2.1s infinite backwards;
-    background: #f3f3f3;
-    height: 12px;
-    margin-top: 6px;
-    position: absolute;
-    width: 24px;
-  }
-  
-  .honeycomb div:after, .honeycomb div:before {
-    content: '';
-    border-left: 12px solid transparent;
-    border-right: 12px solid transparent;
-    position: absolute;
-    left: 0;
-    right: 0;
-  }
-  
-  .honeycomb div:after {
-    top: -6px;
-    border-bottom: 6px solid #f3f3f3;
-  }
-  
-  .honeycomb div:before {
-    bottom: -6px;
-    border-top: 6px solid #f3f3f3;
-  }
-  
-  .honeycomb div:nth-child(1) {
-    -webkit-animation-delay: 0s;
-    animation-delay: 0s;
-    left: -28px;
-    top: 0;
-  }
-  
-  .honeycomb div:nth-child(2) {
-    -webkit-animation-delay: 0.1s;
-    animation-delay: 0.1s;
-    left: -14px;
-    top: 22px;
-  }
-  
-  .honeycomb div:nth-child(3) {
-    -webkit-animation-delay: 0.2s;
-    animation-delay: 0.2s;
-    left: 14px;
-    top: 22px;
-  }
-  
-  .honeycomb div:nth-child(4) {
-    -webkit-animation-delay: 0.3s;
-    animation-delay: 0.3s;
-    left: 28px;
-    top: 0;
-  }
-  
-  .honeycomb div:nth-child(5) {
-    -webkit-animation-delay: 0.4s;
-    animation-delay: 0.4s;
-    left: 14px;
-    top: -22px;
-  }
-  
-  .honeycomb div:nth-child(6) {
-    -webkit-animation-delay: 0.5s;
-    animation-delay: 0.5s;
-    left: -14px;
-    top: -22px;
-  }
-  
-  .honeycomb div:nth-child(7) {
-    -webkit-animation-delay: 0.6s;
-    animation-delay: 0.6s;
-    left: 0;
-    top: 0;
+  12% {
+    stroke-dasharray: 60 600;
+    stroke-width: 30;
+    stroke-dashoffset: -335;
   }
 
-  /* loader css end */
-  
-  .star{
-    position: absolute;
-    color: red;
-    width: 20px;
-    height: 20px;
+  32% {
+    stroke-dasharray: 60 600;
+    stroke-width: 30;
+    stroke-dashoffset: -595;
   }
+
+  40%, 54% {
+    stroke-dasharray: 0 660;
+    stroke-width: 20;
+    stroke-dashoffset: -660;
+  }
+
+  62% {
+    stroke-dasharray: 60 600;
+    stroke-width: 30;
+    stroke-dashoffset: -665;
+  }
+
+  82% {
+    stroke-dasharray: 60 600;
+    stroke-width: 30;
+    stroke-dashoffset: -925;
+  }
+
+  90%, to {
+    stroke-dasharray: 0 660;
+    stroke-width: 20;
+    stroke-dashoffset: -990;
+  }
+}
+
+@keyframes ringB {
+  from, 12% {
+    stroke-dasharray: 0 220;
+    stroke-width: 20;
+    stroke-dashoffset: -110;
+  }
+
+  20% {
+    stroke-dasharray: 20 200;
+    stroke-width: 30;
+    stroke-dashoffset: -115;
+  }
+
+  40% {
+    stroke-dasharray: 20 200;
+    stroke-width: 30;
+    stroke-dashoffset: -195;
+  }
+
+  48%, 62% {
+    stroke-dasharray: 0 220;
+    stroke-width: 20;
+    stroke-dashoffset: -220;
+  }
+
+  70% {
+    stroke-dasharray: 20 200;
+    stroke-width: 30;
+    stroke-dashoffset: -225;
+  }
+
+  90% {
+    stroke-dasharray: 20 200;
+    stroke-width: 30;
+    stroke-dashoffset: -305;
+  }
+
+  98%, to {
+    stroke-dasharray: 0 220;
+    stroke-width: 20;
+    stroke-dashoffset: -330;
+  }
+}
+
+@keyframes ringC {
+  from {
+    stroke-dasharray: 0 440;
+    stroke-width: 20;
+    stroke-dashoffset: 0;
+  }
+
+  8% {
+    stroke-dasharray: 40 400;
+    stroke-width: 30;
+    stroke-dashoffset: -5;
+  }
+
+  28% {
+    stroke-dasharray: 40 400;
+    stroke-width: 30;
+    stroke-dashoffset: -175;
+  }
+
+  36%, 58% {
+    stroke-dasharray: 0 440;
+    stroke-width: 20;
+    stroke-dashoffset: -220;
+  }
+
+  66% {
+    stroke-dasharray: 40 400;
+    stroke-width: 30;
+    stroke-dashoffset: -225;
+  }
+
+  86% {
+    stroke-dasharray: 40 400;
+    stroke-width: 30;
+    stroke-dashoffset: -395;
+  }
+
+  94%, to {
+    stroke-dasharray: 0 440;
+    stroke-width: 20;
+    stroke-dashoffset: -440;
+  }
+}
+
+@keyframes ringD {
+  from, 8% {
+    stroke-dasharray: 0 440;
+    stroke-width: 20;
+    stroke-dashoffset: 0;
+  }
+
+  16% {
+    stroke-dasharray: 40 400;
+    stroke-width: 30;
+    stroke-dashoffset: -5;
+  }
+
+  36% {
+    stroke-dasharray: 40 400;
+    stroke-width: 30;
+    stroke-dashoffset: -175;
+  }
+
+  44%, 50% {
+    stroke-dasharray: 0 440;
+    stroke-width: 20;
+    stroke-dashoffset: -220;
+  }
+
+  58% {
+    stroke-dasharray: 40 400;
+    stroke-width: 30;
+    stroke-dashoffset: -225;
+  }
+
+  78% {
+    stroke-dasharray: 40 400;
+    stroke-width: 30;
+    stroke-dashoffset: -395;
+  }
+
+  86%, to {
+    stroke-dasharray: 0 440;
+    stroke-width: 20;
+    stroke-dashoffset: -440;
+  }
+}

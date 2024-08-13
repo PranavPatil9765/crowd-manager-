@@ -1,10 +1,10 @@
 import React from 'react'
 import "../pages/product.css"
-import { UseContext } from '../contextapi/context';
+import { UseCardContext } from '../contextapi/cardcontext';
 
 const Product = () => {
 
-    const { product} = UseContext();
+    const { product} = UseCardContext();
     
     
   return <>

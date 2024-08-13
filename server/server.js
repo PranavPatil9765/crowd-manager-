@@ -2,13 +2,25 @@ const express = require('express');
 const app = express();
 app.use(express.urlencoded({extended:true}));
 app.use(express.json());
-const socketIO = require('./utils/socketio');
 
-const http = require("http");
-const server = http.createServer(app);
 
-const io = socketIO.init(server);
 
+
+//socket
+
+const { createServer } = require('http');
+const { Server } = require('socket.io');
+const server = createServer(app);
+const handlesocket = require('./utils/socketio.js');
+const io = new Server(server, {
+  cors: {
+    origin: '*', 
+  }
+});
+
+io.on('connection', (socket)=>{
+  handlesocket(socket,io);
+});
 
 
 //dotenv configuration
@@ -22,11 +34,12 @@ app.use(cors());
 
 //home routing
 const router = require('./router/homerouter')
-//routing for the changing room part
-const queueRouter = require('./router/queuerouter')
+
+//login handling and token handling
+const loginrouter = require('./router/loginrouter.js');
 
 app.use("/home/v1/api",router);
-app.use("/rooms/api",queueRouter)
+app.use("/login/api",loginrouter)
 
 //mongodb server
 const mongoose = require('mongoose');
@@ -36,7 +49,7 @@ mongoose.connect(process.env.MONGODB_URL,{
 .then(()=>{console.log('connected to mongodb');})
 .catch(()=>{console.log('error connecting to mongodb')})
 
-//operations on mongodb
+
 
 
 

@@ -6,7 +6,7 @@ export const CardContext = createContext();
 
 // Provide AuthContext
 export const CardProvider = ({ children }) => {
-  const [Cards, SetCards] = useState(null);
+  const [cards, setCards] = useState(null);
   const [loading,setloading] = useState(false);
   const [product,setproduct] = useState(null);
   const navigate = useNavigate();
@@ -21,7 +21,6 @@ export const CardProvider = ({ children }) => {
         
         
         // Fetch data from an API or any other source
-
       getData();
         async function getData() {
           try {
@@ -29,27 +28,30 @@ export const CardProvider = ({ children }) => {
             
             const response = await fetch('http://localhost:3000/home/v1/api');
             const data = await response.json();
-            const showCards = data.map((object) => {
-              
+            
+            
+            const ShowCards = data.map((object) => {
               return (
-                <div className="cardsContainer" onClick={()=>{gotoproduct(object)}}>
-                      <div className="box">
-                      
-                      {object.featured &&  <MdOutlineStar className="star"/>}
-  
-                        <img src={object.url} alt="img" />
-                        <div className="row">
-                          <button className="tag">{object.size}</button>
-                          <button className="tag">{object.brand}</button>
-                          <button className="tag">Shelf: {object.location}</button>
-                        </div>
-                        <p className="title">{object.name}</p>
-                        <button type="button" className="button">${object.price}</button>
-                      </div>
-                    </div>
+                <div className="box" onClick={()=>gotoproduct(object)}>
+            <img src={object.url} alt="img"/>
+            <div className="row">
+                <button className="tag">{object.size}</button>
+                <button className="tag">{object.brand}</button>
+                <button className="tag">Shelf: {object.location}</button>
+            </div>
+            <p className="title">{object.name}</p>
+            <button type="button">${object.price}</button>
+        </div>
+        
               );
             });
-            SetCards(showCards);
+            
+            
+          
+            
+            setCards(ShowCards);
+            
+            
           }
             
           catch (error) {
@@ -76,24 +78,20 @@ export const CardProvider = ({ children }) => {
             })
             const data = await response.json();
             const showCards = data.map((object) => {
+              
               return (
-                <div className="cardsContainer">
-                  <div className="box">
-                  
-                  {object.featured &&  <MdOutlineStar className="star"/>}
-    
-                    <img src={object.url} alt="img" />
-                    <div className="row">
-                      <button className="tag">{object.size}</button>
-                      <button className="tag">{object.brand}</button>
-                      <button className="tag">Shelf: {object.location}</button>
-                    </div>
-                    <p className="title">{object.name}</p>
-                    <button type="button" className="button">${object.price}</button>
-                  </div>
-                </div>
-          );
-        })
+                <div className="box" onClick={gotoproduct(object)}>
+            <img src={object.url} alt="img"/>
+            <div className="row">
+                <button className="tag">{object.size}</button>
+                <button className="tag">{object.brand}</button>
+                <button className="tag">Shelf: {object.location}</button>
+            </div>
+            <p className="title">{object.name}</p>
+            <button type="button">${object.price}</button>
+        </div>
+              );
+            });
         SetCards(showCards);    
         
           } catch (e) {
@@ -105,14 +103,14 @@ export const CardProvider = ({ children }) => {
         }
 
     return (
-        <CardContext.Provider value={{ Cards , ApplyPriceFilter ,loading ,product}}>
+        <CardContext.Provider value={{ cards , ApplyPriceFilter ,loading ,product}}>
             {children}
         </CardContext.Provider>
     );
 };
 
 // Custom hook to use AuthContext
-export const UseContext = () => {
+export const UseCardContext = () => {
     const authContextValue = useContext(CardContext);
     if (!authContextValue) {
         throw new Error("card usage must be used within an AuthProvider");
