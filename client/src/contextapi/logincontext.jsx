@@ -13,6 +13,7 @@ export const LoginProvider = ({ children }) => {
         settoken(token);
     }
     useEffect(() => {
+        settoken(localStorage.getItem('token'))
         if(token){
             setIsLoggedIn(true);
         }else{

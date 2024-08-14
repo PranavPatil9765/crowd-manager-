@@ -64,7 +64,7 @@ export const CardProvider = ({ children }) => {
       }, []);
 
 
-      const ApplyPriceFilter = async(size,minprice,maxprice) => {
+      const ApplyPriceFilter = async(brand,size,price) => {
    
           try{
 
@@ -74,13 +74,13 @@ export const CardProvider = ({ children }) => {
               headers: {
                 'Content-Type': 'application/json'
               },
-              body: JSON.stringify({ size, minprice, maxprice })
+              body: JSON.stringify({ brand,size,price })
             })
             const data = await response.json();
             const showCards = data.map((object) => {
               
               return (
-                <div className="box" onClick={gotoproduct(object)}>
+                <div className="box" onClick={(e)=>gotoproduct(object)}>
             <img src={object.url} alt="img"/>
             <div className="row">
                 <button className="tag">{object.size}</button>
@@ -92,7 +92,7 @@ export const CardProvider = ({ children }) => {
         </div>
               );
             });
-        SetCards(showCards);    
+        setCards(showCards);    
         
           } catch (e) {
             console.log(e);

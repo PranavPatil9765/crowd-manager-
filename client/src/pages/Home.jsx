@@ -1,9 +1,32 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { UseCardContext } from '../contextapi/cardcontext'
 import { useNavigate } from 'react-router-dom';
 const Home = () => {
   const navigate = useNavigate();
-  const {cards} = UseCardContext();
+  const {cards,ApplyPriceFilter} = UseCardContext();
+let brand,price,size;
+  const addfilter = async(e,name)=>{
+    let value = await e.target.text;
+    
+    if(name=='brand') brand = value;
+    if(name=='price') price = value;
+    if(name=='size') size = value;
+    if(name=='remove') {
+      brand = price = size = undefined;
+    }
+
+    try {
+        console.log(brand,size,price);
+        
+        ApplyPriceFilter(brand,size,price);
+     
+    } catch (error) {
+        
+    }finally{
+
+    }
+    
+  }
   return <>
 
     <header className="header-container">
@@ -11,7 +34,7 @@ const Home = () => {
         <input type="text" className="search-bar" placeholder="What's on your mind?"/>
         <div className="button-group">
             <button> Hot Deals </button>
-            <button    onClick={()=>{navigate("/Scan")}}  >Scan QR</button>
+            <button    onClick={()=>{navigate("/Qrscanner")}}  >Scan QR</button>
             <button    onClick={()=>{navigate("/Login")}} >Sign In</button>
             <button className="profile-button"><i className="fa-solid fa-user"></i></button>
         </div>
@@ -20,38 +43,32 @@ const Home = () => {
     <nav className="main-nav">
         <div className="sec-container">
             <div className="dropdown">
-                <button className="dropdown-button" >Explore All ▼</button>
-                <div className="dropdown-content">
-                    <a href="#">Electronics</a>
-                    <a href="#">Clothing</a>
-                    <a href="#">Home & Kitchen</a>
-                    <a href="#">Sports & Outdoors</a>
-                </div>
+                <button className="dropdown-button" onClick={(e)=>{addfilter(e,"remove")}} > Explore All</button>
             </div>
             <div className="dropdown">
-                <button className="dropdown-button">Gender▼</button>
-                <div className="dropdown-content">
-                    <a href="#">Male</a>
-                    <a href="#">Female</a>
-                    <a href="#">Kids Boys</a>
-                    <a href="#">Kids Girls</a>
+                <button className="dropdown-button">Size▼</button>
+                <div className="dropdown-content" onClick={(e)=>{addfilter(e,"size")}}>
+                    <a href="#">M</a>
+                    <a href="#">L</a>
+                    <a href="#">XL</a>
+                    <a href="#">XXL</a>
                 </div>
             </div>
             <div className="dropdown">
                 <button className="dropdown-button">Brand ▼</button>
-                <div className="dropdown-content">
-                    <a href="#">Puma</a>
-                    <a href="#">Nike</a>
-                    <a href="#">Team Spirit</a>
-                    <a href="#">Maximus</a>
+                <div className="dropdown-content" onClick={(e)=>{addfilter(e,"brand")}}>
+                    <a href="#">Levi's</a>
+                    <a href="#">Peter England</a>
+                    <a href="#">Allen Solly</a>
+                    <a href="#">Leriya Fashion</a>
                 </div>
             </div>
             <div className="dropdown">
-                <button className="dropdown-button">Subscription ▼</button>
-                <div className="dropdown-content">
-                    <a href="#">Yearly</a>
-                    <a href="#">Monthly</a>
-                    <a href="#">Weekly</a>
+                <button className="dropdown-button">Price ▼</button>
+                <div className="dropdown-content" onClick={(e)=>{addfilter(e,"price")}}>
+                    <a href="#">Upto 300</a>
+                    <a href="#">Upto 500</a>
+                    <a href="#">500+</a>
                 </div>
             </div>
         </div>
