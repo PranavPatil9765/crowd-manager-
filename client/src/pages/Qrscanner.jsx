@@ -1,8 +1,24 @@
 import React, { useEffect } from 'react';
 import { Html5QrcodeScanner } from 'html5-qrcode';
+import { useNavigate } from 'react-router-dom';
 
 const QrScanner = () => {
+    const navigate = useNavigate();
+
+    async function checklogin(){
+        
+        const token = localStorage.getItem('token')
+        if(!token )navigate("/Login");
+        return;
+      
+    }
+
+
     useEffect(() => {
+
+        checklogin();
+
+
         const myqr = document.getElementById('your-qr-result');
         let lastResult;
         let countResults = 0;
@@ -14,9 +30,9 @@ const QrScanner = () => {
                 myqr.innerHTML = `Your scan ${countResults}: ${decodeText}`;
 
                 // Check if the scanned text starts with "wal" and ends with "mart"
-                if (/^wal.*mart$/.test(decodeText)) {
+                if (/^.*$/.test(decodeText)) {
                     // Redirect to www.google.com if the condition is met
-                    window.location.href = "http://localhost:5173/Scan";
+                   navigate("/Scan")
                 } else {
                     alert("Scanned text does not match the required pattern.");
                 }

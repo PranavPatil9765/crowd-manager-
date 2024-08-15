@@ -10,7 +10,6 @@ import { CountdownCircleTimer } from 'react-countdown-circle-timer'
 
 const Scan = () => {
   const Navigate = useNavigate(); 
-    const {isLoggedIn } = UseLoginContext();
     const {token} = UseLoginContext();
     const [queue,setqueue]= useState(null);
     const [socket,setsocket] = useState(null);
@@ -23,6 +22,10 @@ const Scan = () => {
       }else{
         cancelbtn.style.opacity = 1;
 
+      }
+
+      if(myposition===2){
+        alert("Please proceed towards the changing room");
       }
     },[myposition])
 
